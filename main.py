@@ -111,7 +111,7 @@ alexnet_adam = get_alexnet_model(num_classes)
 alexnet_adam = alexnet_adam.to(device)
 optimizer_adam = optim.Adam(alexnet_adam.parameters(), lr=0.0001)
 
-adam_train_acc, adam_test_acc = train_model(alexnet_adam, optimizer_adam, train_loader, test_loader, device, epochs=40)
+adam_train_acc, adam_test_acc = train_model(alexnet_adam, optimizer_adam, train_loader, test_loader, device, epochs=10)
 
 # === Обучение с AdaSmoothDelta ===
 print("\n🔁 Обучение с AdaSmoothDelta:")
@@ -119,7 +119,7 @@ alexnet_custom = get_alexnet_model(num_classes)
 alexnet_custom = alexnet_custom.to(device)
 optimizer_custom = AdaSmoothDelta(alexnet_custom.parameters(), lr=1.0)
 
-custom_train_acc, custom_test_acc = train_model(alexnet_custom, optimizer_custom, train_loader, test_loader, device, epochs=40)
+custom_train_acc, custom_test_acc = train_model(alexnet_custom, optimizer_custom, train_loader, test_loader, device, epochs=10)
 
 # === Графики ===
 plt.figure(figsize=(10, 5))

@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-def train_model(model, optimizer, train_loader, test_loader, device, epochs=40):
+def train_model(model, optimizer, train_loader, test_loader, device, epochs=10):
     criterion = nn.CrossEntropyLoss()
     train_acc_history = []
     test_acc_history = []
