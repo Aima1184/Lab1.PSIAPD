@@ -1,6 +1,7 @@
 import os
 import scipy.io
 import torch
+import torchvision.models as models
 import torch.nn as nn
 import torch.optim as optim
 import matplotlib.pyplot as plt
@@ -29,6 +30,8 @@ print("📷 Пример изображения:", train_annos[0]["fname"][0])
 def get_transforms():
     return transforms.Compose([
         transforms.Resize((224, 224)),
+        transforms.RandomHorizontalFlip(),
+        transforms.RandomRotation(10),
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
@@ -53,7 +56,7 @@ alexnet = alexnet.to(device)
 
 print("✅ AlexNet готова.")
 
-optimizer_adam = optim.Adam(alexnet.parameters(), lr=0.0001)
+optimizer_adam = optim.Adam(alexnet.parameters(), lr=0.001)
 
 # === Обучение модели ===
 def train_model(model, optimizer, train_loader, test_loader, device, epochs=40):
